@@ -2,11 +2,11 @@ package com.couple.love.domain.couple.entity;
 
 import com.couple.love.domain.album.entity.Album;
 import com.couple.love.domain.anniversary.entity.Anniversary;
-import com.couple.love.domain.diary.entity.Diary;
 import com.couple.love.domain.feed.entity.Feed;
 import com.couple.love.domain.feed.entity.FeedComment;
 import com.couple.love.domain.feed.entity.FeedFavorite;
 import com.couple.love.domain.member.entity.Member;
+import com.couple.love.domain.memo.entity.Memo;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -50,9 +50,6 @@ public class Couple {
     private List<Anniversary> anniversaryList;
 
     @OneToMany(mappedBy = "couple")
-    private List<Diary> diaryList;
-
-    @OneToMany(mappedBy = "couple")
     private List<Feed> feedList;
 
     @OneToMany(mappedBy = "couple")
@@ -60,6 +57,9 @@ public class Couple {
 
     @OneToMany(mappedBy = "couple")
     private List<FeedFavorite> feedFavoriteList;
+
+    @OneToMany(mappedBy = "couple")
+    private List<Memo> memoList;
 
     @Builder
     public Couple(String coupleName, Date startDate) {

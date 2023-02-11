@@ -2,7 +2,7 @@ package com.couple.love.domain.member.entity;
 
 import com.couple.love.common.entity.Role;
 import com.couple.love.domain.chat.entity.ChatHistory;
-import com.couple.love.domain.diary.entity.Diary;
+import com.couple.love.domain.memo.entity.Memo;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -45,6 +45,7 @@ public class Member {
     @OneToOne
     @JoinColumn(name = "refresh_token_id")
     private RefreshToken refreshToken;
+
     @OneToOne
     @JoinColumn(name="member_photo_id")
     private MemberPhoto memberPhoto;
@@ -53,6 +54,6 @@ public class Member {
     private List<ChatHistory> chatHistoryList;
 
     @OneToMany(mappedBy = "writer")
-    private List<Diary> diaryList;
+    private List<Memo> memoList;
 
 }
