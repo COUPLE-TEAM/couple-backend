@@ -1,6 +1,5 @@
 package com.couple.love.domain.couple.entity;
 
-import com.couple.love.domain.member.entity.Member;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;

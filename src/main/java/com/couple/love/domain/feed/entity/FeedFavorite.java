@@ -1,7 +1,6 @@
 package com.couple.love.domain.feed.entity;
 
 import com.couple.love.domain.couple.entity.Couple;
-import com.couple.love.domain.member.entity.Member;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -24,9 +23,5 @@ public class FeedFavorite {
     @ManyToOne
     @JoinColumn(name = "couple_id")
     private Couple couple;
-
-    @ManyToOne
-    @JoinColumn(name = "member_id")
-    private Member member;
 
 }

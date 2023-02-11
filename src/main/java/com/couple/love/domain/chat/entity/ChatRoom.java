@@ -20,11 +20,11 @@ public class ChatRoom {
     private Long id;
 
     @OneToOne
-    @JoinColumn(name = "member_id")
+    @JoinColumn(referencedColumnName = "member_id")
     private Member partner1;
 
     @OneToOne
-    @JoinColumn(name = "member_id")
+    @JoinColumn(referencedColumnName = "member_id")
     private Member partner2;
 
     @OneToMany(mappedBy = "chatRoom")
