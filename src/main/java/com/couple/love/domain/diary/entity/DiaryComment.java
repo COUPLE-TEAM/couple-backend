@@ -1,6 +1,5 @@
-package com.couple.love.domain.feed.entity;
+package com.couple.love.domain.diary.entity;
 
-import com.couple.love.domain.couple.entity.Couple;
 import com.couple.love.domain.member.entity.Member;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -10,29 +9,25 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "feed")
+@Table(name = "diary_comment")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Feed {
+public class DiaryComment {
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-    @Column(name = "feed")
+    @Column(name = "diary_comment_id")
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "couple_id")
-    private Couple couple;
-
-
-    @Column(name="text")
-    private String text;
+    @JoinColumn(name = "diary_id")
+    private Diary diary;
 
     @ManyToOne
     @JoinColumn(name = "member_id")
     private Member writer;
 
-    @Column(name="feed_public_status")
-    private Boolean publicStatus;
+    @Column(name = "text")
+    private String text;
 
 }

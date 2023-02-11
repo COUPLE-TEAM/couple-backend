@@ -1,11 +1,8 @@
 package com.couple.love.domain.member.entity;
 
-import com.couple.love.domain.couple.entity.Couple;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.time.LocalDateTime;
 
 @Entity
 @Setter
@@ -19,7 +16,7 @@ public class Member {
     private Long id;
 
     @Column(name="couple_id")
-    private Long couple_id;
+    private Long coupleId;
 
     @Column(name = "email")
     private String email;
@@ -36,11 +33,4 @@ public class Member {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @Column(name="created_at")
-    @Temporal(TemporalType.TIMESTAMP)
-    private LocalDateTime createdAt;
-
-    @Column(name="updated_at")
-    @Temporal(TemporalType.TIMESTAMP)
-    private LocalDateTime updatedAt;
 }

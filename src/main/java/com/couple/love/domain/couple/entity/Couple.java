@@ -4,7 +4,6 @@ import com.couple.love.domain.member.entity.Member;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Date;
 
@@ -29,17 +28,8 @@ public class Couple {
     @Column(name = "start_date")
     private Date startDate;
 
-    @Column(name="created_at")
-    @Temporal(TemporalType.TIMESTAMP)
-    private LocalDateTime createdAt;
-
-    @Column(name="updated_at")
-    @Temporal(TemporalType.TIMESTAMP)
-    private LocalDateTime updatedAt;
-
-
     @Builder
-    public Couple(Long partner1, Long partner2, String coupleName, Date startDate) {
+    public Couple(String coupleName, Date startDate) {
     }
 
 }

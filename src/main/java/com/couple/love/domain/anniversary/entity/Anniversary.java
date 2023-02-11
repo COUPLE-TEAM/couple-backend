@@ -1,38 +1,35 @@
-package com.couple.love.domain.feed.entity;
+package com.couple.love.domain.anniversary.entity;
 
 import com.couple.love.domain.couple.entity.Couple;
-import com.couple.love.domain.member.entity.Member;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
-@Table(name = "feed")
+@Table(name = "anniversary")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Feed {
+public class Anniversary {
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-    @Column(name = "feed")
+    @Column(name = "anniversary_id")
     private Long id;
 
     @ManyToOne
     @JoinColumn(name = "couple_id")
     private Couple couple;
 
+    @Column(name="name")
+    private String name;
 
-    @Column(name="text")
-    private String text;
+    @Column(name="content")
+    private String content;
 
-    @ManyToOne
-    @JoinColumn(name = "member_id")
-    private Member writer;
-
-    @Column(name="feed_public_status")
-    private Boolean publicStatus;
+    @Column(name="date")
+    private Date date;
 
 }
