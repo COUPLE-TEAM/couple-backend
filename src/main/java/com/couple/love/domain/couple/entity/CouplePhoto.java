@@ -1,5 +1,6 @@
 package com.couple.love.domain.couple.entity;
 
+import com.couple.love.domain.member.entity.Member;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -11,13 +12,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CouplePhoto {
 
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "couple_photo_id")
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "couple_id")
+    @OneToOne(mappedBy = "couplePhoto")
     private Couple couple;
 
     @Column(name = "photo_url")

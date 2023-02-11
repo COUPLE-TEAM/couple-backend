@@ -7,7 +7,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "feed")
@@ -15,9 +15,9 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Feed {
 
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "feed")
+    @Column(name = "feed_id")
     private Long id;
 
     @ManyToOne
@@ -32,7 +32,11 @@ public class Feed {
     @JoinColumn(name = "member_id")
     private Member writer;
 
-    @Column(name="feed_public_status")
+    @Column(name="public_status")
     private Boolean publicStatus;
+
+    @OneToMany
+    @JoinColumn(name="feed_id")
+    private List<FeedPhoto> feedPhotoList;
 
 }

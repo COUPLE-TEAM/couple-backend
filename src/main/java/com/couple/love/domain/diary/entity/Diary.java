@@ -7,13 +7,15 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Table(name = "diary")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Diary {
 
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "diary_id")
     private Long id;
@@ -31,5 +33,13 @@ public class Diary {
     @ManyToOne
     @JoinColumn(name = "couple_id")
     private Couple couple;
+
+    @OneToMany
+    @JoinColumn(name="diary_id")
+    private List<DiaryComment> diaryCommentList;
+
+    @OneToMany
+    @JoinColumn(name="diary_id")
+    private List<DiaryPhoto> diaryPhotoList;
 
 }

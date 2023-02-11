@@ -6,14 +6,12 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
 @Entity
 @Table(name = "diary_favorite")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class DiaryFavorite {
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "diary_favorite_id")
     private Long id;

@@ -1,8 +1,13 @@
 package com.couple.love.domain.member.entity;
 
+import com.couple.love.domain.chat.entity.ChatHistory;
+import com.couple.love.domain.diary.entity.Diary;
+import com.couple.love.domain.diary.entity.DiaryComment;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 @Entity
 @Setter
@@ -10,7 +15,7 @@ import lombok.Setter;
 @Table(name = "member")
 public class Member {
 
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "member_id")
     private Long id;
@@ -32,5 +37,17 @@ public class Member {
 
     @Column(name = "phone_number")
     private String phoneNumber;
+
+    @OneToOne
+    @JoinColumn(name="member_photo_id")
+    private MemberPhoto memberPhoto;
+
+    @OneToMany
+    @JoinColumn(name="member_id")
+    private List<ChatHistory> chatHistoryList;
+
+    @OneToMany
+    @JoinColumn(name="member_id")
+    private List<Diary> diaryList;
 
 }
