@@ -19,17 +19,17 @@ public class ChatRoom {
     @Column(name = "chat_room_id")
     private Long id;
 
-    @OneToOne
-    @JoinColumn(name = "member_id")
-    private Member partner1;
-
-    @OneToOne
-    @JoinColumn(name = "member_id")
-    private Member partner2;
-
-    @OneToMany(mappedBy = "chatRoom")
-    private List<ChatHistory> chatHistoryList;
-
-    @OneToMany(mappedBy = "chatRoom")
-    private List<ChatMessage> chatMessageList;
+//    @OneToOne
+//    @JoinColumn(name = "member_id")
+//    private Member partner1;
+//
+//    @OneToOne
+//    @JoinColumn(name = "member_id")
+//    private Member partner2;
+//
+//    @OneToMany(mappedBy = "chatRoom")
+//    private List<ChatHistory> chatHistoryList;
+//
+//    @OneToMany(mappedBy = "chatRoom")
+//    private List<ChatMessage> chatMessageList;
 }

@@ -26,9 +26,13 @@ public class Couple {
     @Column(name = "couple_id")
     private Long id;
 
-    @OneToMany
-    @JoinColumn(name="couple_id")
-    public List<Member> partners;
+    @OneToOne
+    @JoinColumn(referencedColumnName="member_id")
+    public Member partner1;
+
+    @OneToOne
+    @JoinColumn(referencedColumnName="member_id")
+    public Member partner2;
 
     @Column(name = "name")
     private String Name;
