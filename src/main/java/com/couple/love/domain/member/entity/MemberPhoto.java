@@ -16,9 +16,6 @@ public class MemberPhoto {
     @Column(name = "member_photo_id")
     private Long id;
 
-    @OneToOne(mappedBy = "memberPhoto")
-    private Member member;
-
     @Column(name = "photo_url")
     private String photoUrl;
 
