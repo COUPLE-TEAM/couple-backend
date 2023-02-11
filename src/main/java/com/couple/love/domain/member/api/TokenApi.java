@@ -1,6 +1,7 @@
 package com.couple.love.domain.member.api;
 
 import com.couple.love.auth.JwtConfigurer;
+import com.couple.love.common.entity.Role;
 import com.couple.love.domain.member.dto.TokenDto;
 import com.couple.love.domain.member.entity.Member;
 import com.couple.love.domain.member.entity.RefreshToken;
@@ -31,6 +32,7 @@ public class TokenApi implements TokenService {
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + expiredAt);
 
+        System.out.println("expiryDate = " + expiryDate);
         return Jwts.builder()
                 .signWith(signingKey)
                 .setClaims(claims)
@@ -62,6 +64,15 @@ public class TokenApi implements TokenService {
         return memberRepository.findByEmail(email).orElseThrow(
                 IllegalArgumentException::new
         ).getId();
+    }
+
+    @Override
+    public Role getMemberRole(String authToken) {
+        String email = parse(authToken).getBody().getSubject();
+
+        return memberRepository.findByEmail(email).orElseThrow(
+                IllegalArgumentException::new
+        ).getRole();
     }
 
     @Override

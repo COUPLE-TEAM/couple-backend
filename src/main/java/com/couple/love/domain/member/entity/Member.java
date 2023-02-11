@@ -13,7 +13,7 @@ import lombok.*;
 @Getter
 public class Member {
 
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "member_id")
     private Long id;

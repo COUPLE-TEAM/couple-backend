@@ -1,7 +1,9 @@
 package com.couple.love.domain.member.controller;
 
 import com.couple.love.domain.member.api.AuthApi;
+import com.couple.love.domain.member.api.AuthService;
 import com.couple.love.domain.member.api.MemberApi;
+import com.couple.love.domain.member.api.MemberService;
 import com.couple.love.domain.member.dto.MemberDto;
 import com.couple.love.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,14 +19,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("member/")
 public class MemberController {
 
-    private final MemberApi memberApi;
-    private final AuthApi authApi;
+    private final MemberService memberService;
+    private final AuthService authService;
     private final MemberRepository memberRepository;
 
     // 회원가입
     @PostMapping("/signUp")
     private ResponseEntity<MemberDto.SignUpResponse> signUp(@RequestBody MemberDto.SignUpRequest signUpRequest) throws Exception {
-        MemberDto.SignUpResponse response = authApi.signUp(signUpRequest);
+        MemberDto.SignUpResponse response = authService.signUp(signUpRequest);
         return new ResponseEntity(response, HttpStatus.OK);
     }
 
