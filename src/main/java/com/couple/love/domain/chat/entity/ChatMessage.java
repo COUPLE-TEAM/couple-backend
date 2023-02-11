@@ -23,15 +23,15 @@ public class ChatMessage {
     @JoinColumn(name = "chat_room_id")
     private ChatRoom chatRoom;
 
-//    @OneToOne
-//    @JoinColumn(name = "member_id")
-//    private Member sender;
-//
-//    @OneToOne
-//    @JoinColumn(name = "member_id")
-//    private Member receiver;
+    @OneToOne
+    @JoinColumn(referencedColumnName = "member_id")
+    private Member sender;
 
-    @Column(name="message")
+    @OneToOne
+    @JoinColumn(referencedColumnName = "member_id")
+    private Member receiver;
+
+    @Column(name = "message")
     private String message;
 
     @OneToMany(mappedBy = "chatMessage")

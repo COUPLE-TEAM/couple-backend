@@ -2,7 +2,6 @@ package com.couple.love.domain.member.entity;
 
 import com.couple.love.domain.chat.entity.ChatHistory;
 import com.couple.love.domain.diary.entity.Diary;
-import com.couple.love.domain.diary.entity.DiaryComment;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

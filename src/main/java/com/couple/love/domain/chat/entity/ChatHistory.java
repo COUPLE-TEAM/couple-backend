@@ -21,9 +21,9 @@ public class ChatHistory {
     @JoinColumn(name = "chat_room_id")
     private ChatRoom chatRoom;
 
-//    @ManyToOne
-//    @JoinColumn(name = "member_id")
-//    private Member member;
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
 
 
 }

@@ -17,12 +17,12 @@ public class Follow {
     @Column(name = "follow_id")
     private Long id;
 
-//    @ManyToOne
-//    @JoinColumn(name="couple_id")
-//    private Couple followerCouple;
-//
-//    @ManyToOne
-//    @JoinColumn(name="couple_id")
-//    private Couple followeeCouple;
+    @ManyToOne
+    @JoinColumn(referencedColumnName = "couple_id")
+    private Couple followerCouple;
+
+    @ManyToOne
+    @JoinColumn(referencedColumnName = "couple_id")
+    private Couple followeeCouple;
 
 }
