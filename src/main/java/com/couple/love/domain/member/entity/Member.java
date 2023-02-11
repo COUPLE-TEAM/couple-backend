@@ -1,17 +1,19 @@
 package com.couple.love.domain.member.entity;
 
+import com.couple.love.common.entity.Role;
 import com.couple.love.domain.chat.entity.ChatHistory;
 import com.couple.love.domain.diary.entity.Diary;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
 @Entity
-@Setter
-@Getter
 @Table(name = "member")
+@Builder
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
+@Getter
 public class Member {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,6 +39,12 @@ public class Member {
     @Column(name = "phone_number")
     private String phoneNumber;
 
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    @OneToOne
+    @JoinColumn(name = "refresh_token_id")
+    private RefreshToken refreshToken;
     @OneToOne
     @JoinColumn(name="member_photo_id")
     private MemberPhoto memberPhoto;
