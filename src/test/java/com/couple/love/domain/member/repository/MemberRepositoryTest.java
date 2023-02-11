@@ -22,11 +22,8 @@ class MemberRepositoryTest {
 
     @Test
     public void memberSaveTest() {
-        Member member = new Member();
-        member.setEmail("ttt");
-        member.setPassword("ttt");
-        member.setNickname("zzz");
-
+        Member member = Member.builder().email("asdf").nickname("sh")
+                .password("1234").build();
         memberRepository.save(member);
 
         List<Member> all = memberRepository.findAll();

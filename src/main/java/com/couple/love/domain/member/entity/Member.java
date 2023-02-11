@@ -1,15 +1,16 @@
 package com.couple.love.domain.member.entity;
 
+import com.couple.love.common.entity.Role;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-import java.time.LocalDateTime;
 
 @Entity
-@Setter
-@Getter
 @Table(name = "member")
+@Builder
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
+@Getter
 public class Member {
 
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -32,9 +33,11 @@ public class Member {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @Column(name="created_at")
-    private LocalDateTime createdAt;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
-    @Column(name="updated_at")
-    private LocalDateTime updatedAt;
+    @OneToOne
+    @JoinColumn(name = "refresh_token_id")
+    private RefreshToken refreshToken;
+
 }
