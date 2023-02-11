@@ -34,8 +34,7 @@ public class ChatMessage {
     @Column(name="message")
     private String message;
 
-    @OneToMany
-    @JoinColumn(name = "chat_message_id")
+    @OneToMany(mappedBy = "chatMessage")
     private List<ChatPhoto> chatPhotoList;
 
 }

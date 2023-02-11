@@ -7,10 +7,10 @@ import com.couple.love.domain.feed.entity.Feed;
 import com.couple.love.domain.feed.entity.FeedComment;
 import com.couple.love.domain.feed.entity.FeedFavorite;
 import com.couple.love.domain.member.entity.Member;
-import com.couple.love.domain.member.entity.MemberPhoto;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -34,34 +34,28 @@ public class Couple {
     private String Name;
 
     @Column(name = "start_date")
-    private Date startDate;
+    private LocalDateTime startDate;
 
     @OneToOne
     @JoinColumn(name="couple_photo_id")
     private CouplePhoto couplePhoto;
 
-    @OneToMany
-    @JoinColumn(name="couple_id")
-    private List<Album> albums;
+    @OneToMany(mappedBy = "couple")
+    private List<Album> albumList;
 
-    @OneToMany
-    @JoinColumn(name="couple_id")
+    @OneToMany(mappedBy = "couple")
     private List<Anniversary> anniversaryList;
 
-    @OneToMany
-    @JoinColumn(name="couple_id")
+    @OneToMany(mappedBy = "couple")
     private List<Diary> diaryList;
 
-    @OneToMany
-    @JoinColumn(name="couple_id")
+    @OneToMany(mappedBy = "couple")
     private List<Feed> feedList;
 
-    @OneToMany
-    @JoinColumn(name="couple_id")
+    @OneToMany(mappedBy = "couple")
     private List<FeedComment> feedCommentList;
 
-    @OneToMany
-    @JoinColumn(name="couple_id")
+    @OneToMany(mappedBy = "couple")
     private List<FeedFavorite> feedFavoriteList;
 
     @Builder

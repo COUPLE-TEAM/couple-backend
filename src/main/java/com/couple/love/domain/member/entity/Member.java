@@ -42,12 +42,10 @@ public class Member {
     @JoinColumn(name="member_photo_id")
     private MemberPhoto memberPhoto;
 
-    @OneToMany
-    @JoinColumn(name="member_id")
+    @OneToMany(mappedBy = "member")
     private List<ChatHistory> chatHistoryList;
 
-    @OneToMany
-    @JoinColumn(name="member_id")
+    @OneToMany(mappedBy = "writer")
     private List<Diary> diaryList;
 
 }

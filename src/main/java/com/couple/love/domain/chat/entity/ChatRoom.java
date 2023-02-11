@@ -27,11 +27,9 @@ public class ChatRoom {
     @JoinColumn(name = "member_id")
     private Member partner2;
 
-    @OneToMany
-    @JoinColumn(name = "chat_room_id")
+    @OneToMany(mappedBy = "chatRoom")
     private List<ChatHistory> chatHistoryList;
 
-    @OneToMany
-    @JoinColumn(name = "chat_room_id")
+    @OneToMany(mappedBy = "chatRoom")
     private List<ChatMessage> chatMessageList;
 }

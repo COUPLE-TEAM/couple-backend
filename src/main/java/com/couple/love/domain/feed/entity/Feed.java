@@ -35,8 +35,7 @@ public class Feed {
     @Column(name="public_status")
     private Boolean publicStatus;
 
-    @OneToMany
-    @JoinColumn(name="feed_id")
+    @OneToMany(mappedBy = "feed")
     private List<FeedPhoto> feedPhotoList;
 
 }

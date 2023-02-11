@@ -34,12 +34,10 @@ public class Diary {
     @JoinColumn(name = "couple_id")
     private Couple couple;
 
-    @OneToMany
-    @JoinColumn(name="diary_id")
+    @OneToMany(mappedBy = "diary")
     private List<DiaryComment> diaryCommentList;
 
-    @OneToMany
-    @JoinColumn(name="diary_id")
+    @OneToMany(mappedBy = "diary")
     private List<DiaryPhoto> diaryPhotoList;
 
 }
