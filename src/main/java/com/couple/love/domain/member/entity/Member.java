@@ -1,10 +1,13 @@
 package com.couple.love.domain.member.entity;
 
+import com.couple.love.domain.chat.entity.ChatHistory;
+import com.couple.love.domain.diary.entity.Diary;
+import com.couple.love.domain.diary.entity.DiaryComment;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Setter
@@ -12,10 +15,13 @@ import java.time.LocalDateTime;
 @Table(name = "member")
 public class Member {
 
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "member_id")
     private Long id;
+
+    @Column(name="couple_id")
+    private Long coupleId;
 
     @Column(name = "email")
     private String email;
@@ -32,9 +38,14 @@ public class Member {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @Column(name="created_at")
-    private LocalDateTime createdAt;
+    @OneToOne
+    @JoinColumn(name="member_photo_id")
+    private MemberPhoto memberPhoto;
 
-    @Column(name="updated_at")
-    private LocalDateTime updatedAt;
+    @OneToMany(mappedBy = "member")
+    private List<ChatHistory> chatHistoryList;
+
+    @OneToMany(mappedBy = "writer")
+    private List<Diary> diaryList;
+
 }

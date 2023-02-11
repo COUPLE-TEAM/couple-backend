@@ -7,35 +7,26 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Entity
-@Table(name = "feed")
+@Table(name = "feed_favorite")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Feed {
-
+public class FeedFavorite {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "feed_id")
+    @Column(name = "feed_favorite_id")
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "feed_id")
+    private Feed feed;
 
     @ManyToOne
     @JoinColumn(name = "couple_id")
     private Couple couple;
 
-
-    @Column(name="text")
-    private String text;
-
     @ManyToOne
     @JoinColumn(name = "member_id")
-    private Member writer;
-
-    @Column(name="public_status")
-    private Boolean publicStatus;
-
-    @OneToMany(mappedBy = "feed")
-    private List<FeedPhoto> feedPhotoList;
+    private Member member;
 
 }
