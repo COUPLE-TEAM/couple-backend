@@ -2,7 +2,6 @@ package com.couple.love.domain.feed.dto;
 
 import com.couple.love.domain.feed.entity.Feed;
 import com.couple.love.domain.feed.entity.FeedPhoto;
-import com.couple.love.domain.member.entity.Member;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -53,4 +52,10 @@ public class FeedDTO {
     }
 
 
+    @Data
+    public static class FeedUpdateRequest {
+        private String text;
+        private Boolean publicStatus;
+        private List<MultipartFile> photos = new ArrayList<>();
+    }
 }

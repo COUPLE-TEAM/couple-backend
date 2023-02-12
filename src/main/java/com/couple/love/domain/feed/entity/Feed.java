@@ -32,7 +32,7 @@ public class Feed extends BaseTimeEntity {
 
     @ManyToOne
     @JoinColumn(name = "member_id")
-    private Member writer;
+    private Member member;
 
     @Column(name="public_status")
     private Boolean publicStatus;
@@ -47,8 +47,14 @@ public class Feed extends BaseTimeEntity {
     }
 
     public void setMember(Member member) {
-        this.writer = member;
+        this.member = member;
     }
 
+    public void setPublicStatus(Boolean publicStatus) {
+        this.publicStatus = publicStatus;
+    }
 
+    public void setText(String text) {
+        this.text = text;
+    }
 }
