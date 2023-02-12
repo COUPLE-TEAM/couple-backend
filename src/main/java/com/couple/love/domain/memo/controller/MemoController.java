@@ -34,9 +34,9 @@ public class MemoController {
     }
 
     // 메모 멤버별 조회
-    @GetMapping("member/{memberId}")
-    private ResponseEntity<List<MemoDTO.MemoDetailResponse>> getAllMemoByMember(@PathVariable Long memberId) throws Exception {
-        List<MemoDTO.MemoDetailResponse> response = memoService.getAllMemoByMember(memberId);
+    @GetMapping("member")
+    private ResponseEntity<List<MemoDTO.MemoDetailResponse>> getAllMemoByMember(@AuthMember Member member) throws Exception {
+        List<MemoDTO.MemoDetailResponse> response = memoService.getAllMemoByMember(member.getId());
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
