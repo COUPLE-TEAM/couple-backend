@@ -2,8 +2,7 @@ package com.couple.love.auth;
 
 import com.couple.love.common.annotations.Permission;
 import com.couple.love.common.entity.Role;
-import com.couple.love.domain.member.api.AuthService;
-import com.couple.love.domain.member.api.TokenService;
+import com.couple.love.domain.member.api.interfaces.TokenService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
