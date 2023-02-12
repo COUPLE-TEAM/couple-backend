@@ -1,10 +1,8 @@
 package com.couple.love.domain.member.controller;
 
-import com.couple.love.domain.member.api.AuthApi;
-import com.couple.love.domain.member.api.AuthService;
-import com.couple.love.domain.member.api.MemberApi;
-import com.couple.love.domain.member.api.MemberService;
-import com.couple.love.domain.member.dto.MemberDto;
+import com.couple.love.domain.member.api.interfaces.AuthService;
+import com.couple.love.domain.member.api.interfaces.MemberService;
+import com.couple.love.domain.member.dto.MemberDTO;
 import com.couple.love.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -25,14 +23,15 @@ public class MemberController {
 
     // 회원가입
     @PostMapping("/signUp")
-    private ResponseEntity<MemberDto.SignUpResponse> signUp(@RequestBody MemberDto.SignUpRequest signUpRequest) throws Exception {
-        MemberDto.SignUpResponse response = authService.signUp(signUpRequest);
-        return new ResponseEntity(response, HttpStatus.OK);
+    private ResponseEntity<MemberDTO.SignUpResponse> signUp(@RequestBody MemberDTO.SignUpRequest signUpRequest) throws Exception {
+        MemberDTO.SignUpResponse response = authService.signUp(signUpRequest);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     // 로그인
     @PostMapping("/login")
-    private ResponseEntity<MemberDto.LoginResponse> login(@RequestBody MemberDto.LoginRequest loginRequest) {
-        return null;
+    private ResponseEntity<MemberDTO.LoginResponse> login(@RequestBody MemberDTO.LoginRequest loginRequest) throws Exception {
+        MemberDTO.LoginResponse response = authService.login(loginRequest);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

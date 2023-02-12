@@ -1,14 +1,14 @@
 package com.couple.love.domain.feed.entity;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Table(name = "feed_photo")
 @Getter
+@Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class FeedPhoto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -21,5 +21,12 @@ public class FeedPhoto {
 
     @Column(name="photo_url")
     private String photoUrl;
+
+    public void setFeed(Feed feed) {
+        this.feed = feed;
+        if (!feed.getFeedPhotoList().contains(this)) {
+            feed.getFeedPhotoList().add(this);
+        }
+    }
 
 }

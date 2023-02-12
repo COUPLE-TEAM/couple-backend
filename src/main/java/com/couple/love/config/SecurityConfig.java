@@ -1,6 +1,7 @@
 package com.couple.love.config;
 
 import com.couple.love.auth.*;
+import com.couple.love.common.handler.AuthMemberResolver;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,8 +11,11 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import java.util.List;
 
 @Configuration
 @RequiredArgsConstructor
@@ -19,8 +23,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class SecurityConfig implements WebMvcConfigurer {
 
     private final CustomCorsFilter customCorsFilter;
-
     private final PermissionInterceptor permissionInterceptor;
+
+    private final AuthMemberResolver authMemberResolver;
 
     @Bean
     PasswordEncoder passwordEncoder() {
@@ -43,7 +48,11 @@ public class SecurityConfig implements WebMvcConfigurer {
                         request.requestMatchers("/**").permitAll()
                 )
                 .build();
+    }
 
+    @Override
+    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
+        resolvers.add(authMemberResolver);
     }
 }
 
