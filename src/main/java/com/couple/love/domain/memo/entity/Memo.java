@@ -35,8 +35,10 @@ public class Memo {
     public void setMember(Member member) {
         this.writer = member;
     }
-    public void setMemo(String title, String text){
-        this.text = text;
+    public void setMemoTitle(String title){
         this.title = title;
+    }
+    public void setMemoText(String text) {
+        this.text = text;
     }
 }

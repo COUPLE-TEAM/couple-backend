@@ -20,30 +20,38 @@ public class MemoController {
 
     // 메모 조회
     @GetMapping("/{memoId}")
-    private ResponseEntity<MemoDTO.GetMemoResponse> getMemo(@PathVariable Long memoId) throws Exception {
-        MemoDTO.GetMemoResponse response = memoService.getMemo(memoId);
+    private ResponseEntity<MemoDTO.MemoDetailResponse> getMemo(@PathVariable Long memoId) throws Exception {
+        MemoDTO.MemoDetailResponse response = memoService.getMemo(memoId);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    // 메모 리스트 조회
+    // 메모 전체 조회
     @GetMapping("couple/{coupleId}")
-    private ResponseEntity<List<MemoDTO.GetMemoResponse>> getMemoList(@PathVariable Long coupleId) throws Exception {
-        List<MemoDTO.GetMemoResponse> response = memoService.getMemoListByCouple(coupleId);
+    private ResponseEntity<List<MemoDTO.MemoDetailResponse>> getAllMemoByCouple(@PathVariable Long coupleId) throws Exception {
+        List<MemoDTO.MemoDetailResponse> response = memoService.getAllMemoByCouple(coupleId);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    // 메모 멤버별 조회
+    @GetMapping("member/{memberId}")
+    private ResponseEntity<List<MemoDTO.MemoDetailResponse>> getAllMemoByMember(@PathVariable Long memberId) throws Exception {
+        List<MemoDTO.MemoDetailResponse> response = memoService.getAllMemoByMember(memberId);
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     // 메모 생성
     @PostMapping("/")
-    private ResponseEntity<MemoDTO.CreateMemoResponse> createMemo(@AuthMember Member member, @RequestBody MemoDTO.CreateMemoRequest createMemoRequest) throws Exception {
-        MemoDTO.CreateMemoResponse response = memoService.createMemo(member, createMemoRequest);
+    private ResponseEntity<MemoDTO.MemoDetailResponse> createMemo(@AuthMember Member member, @RequestBody MemoDTO.CreateMemoRequest createMemoRequest) throws Exception {
+        MemoDTO.MemoDetailResponse response = memoService.createMemo(member, createMemoRequest);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     // 메모 수정
     @PatchMapping("/{memoId}")
-    private ResponseEntity<MemoDTO.UpdateMemoResponse> updateMemo(@PathVariable Long memoId, @RequestBody MemoDTO.UpdateMemoRequest updateMemoRequest) throws Exception {
-        MemoDTO.UpdateMemoResponse response = memoService.updateMemo(memoId, updateMemoRequest);
+    private ResponseEntity<MemoDTO.MemoDetailResponse> updateMemo(@PathVariable Long memoId, @RequestBody MemoDTO.UpdateMemoRequest updateMemoRequest) throws Exception {
+        MemoDTO.MemoDetailResponse response = memoService.updateMemo(memoId, updateMemoRequest);
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

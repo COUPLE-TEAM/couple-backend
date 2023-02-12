@@ -28,36 +28,8 @@ public class MemoDTO {
                     .build();
         }
     }
-
-    @Data
-    public static class CreateMemoResponse {
-        private Long memberId;
-        private Long memoId;
-        private Long coupleId;
-
-        public CreateMemoResponse(Memo memo) {
-            this.memoId = memo.getId();
-        }
-    }
-
-    @Data
-    public static class GetMemoResponse {
-        private Long memberId;
-        private Long coupleId;
-        private String title;
-        private String text;
-
-        public GetMemoResponse(Memo memo) {
-            this.memberId = memo.getWriter().getId();
-            this.coupleId = memo.getCouple().getId();
-            this.title = memo.getTitle();
-            this.text = memo.getText();
-        }
-    }
-
     @Data
     public static class UpdateMemoRequest {
-        //        private Member member;
 //        private Couple couple;
         private String title;
         private String text;
@@ -71,15 +43,21 @@ public class MemoDTO {
     }
 
     @Data
-    public static class UpdateMemoResponse {
-        private Long memberId;
-        private Long memoId;
-        private Long coupleId;
+    public static class MemoDetailResponse {
 
-        public UpdateMemoResponse(Memo memo) {
+        private Long memoId;
+        private Long memberId;
+//        private Long coupleId;
+        private String title;
+        private String text;
+
+        public MemoDetailResponse(Memo memo) {
             this.memoId = memo.getId();
+            this.memberId = memo.getWriter().getId();
+//            this.coupleId = memo.getCouple().getId();
+            this.title = memo.getTitle();
+            this.text = memo.getText();
         }
     }
-
 
 }
