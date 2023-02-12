@@ -25,13 +25,13 @@ public class MemberController {
     @PostMapping("/signUp")
     private ResponseEntity<MemberDTO.SignUpResponse> signUp(@RequestBody MemberDTO.SignUpRequest signUpRequest) throws Exception {
         MemberDTO.SignUpResponse response = authService.signUp(signUpRequest);
-        return new ResponseEntity(response, HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     // 로그인
     @PostMapping("/login")
     private ResponseEntity<MemberDTO.LoginResponse> login(@RequestBody MemberDTO.LoginRequest loginRequest) throws Exception {
         MemberDTO.LoginResponse response = authService.login(loginRequest);
-        return new ResponseEntity(response, HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }
