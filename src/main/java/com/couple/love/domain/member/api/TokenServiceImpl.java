@@ -2,7 +2,8 @@ package com.couple.love.domain.member.api;
 
 import com.couple.love.auth.JwtConfigurer;
 import com.couple.love.common.entity.Role;
-import com.couple.love.domain.member.dto.TokenDto;
+import com.couple.love.domain.member.api.interfaces.TokenService;
+import com.couple.love.domain.member.dto.TokenDTO;
 import com.couple.love.domain.member.entity.Member;
 import com.couple.love.domain.member.entity.RefreshToken;
 import com.couple.love.domain.member.repository.MemberRepository;
@@ -17,7 +18,7 @@ import java.util.Date;
 
 @Service
 @RequiredArgsConstructor
-public class TokenApi implements TokenService {
+public class TokenServiceImpl implements TokenService {
 
     private final MemberRepository memberRepository;
     private final RefreshTokenRepository refreshTokenRepository;
@@ -32,7 +33,6 @@ public class TokenApi implements TokenService {
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + expiredAt);
 
-        System.out.println("expiryDate = " + expiryDate);
         return Jwts.builder()
                 .signWith(signingKey)
                 .setClaims(claims)
@@ -42,14 +42,14 @@ public class TokenApi implements TokenService {
     }
 
     @Override
-    public TokenDto generateAccessTokenAndRefreshToken(String email, Member member) {
+    public TokenDTO generateAccessTokenAndRefreshToken(String email, Member member) {
         JwtBuilder accessTokenBuilder = generateTokenBuilderByEmailAndExpiration(email, jwtConfigurer.getAccessTokenExp());
         JwtBuilder refreshTokenBuilder = generateTokenBuilderByEmailAndExpiration(email, jwtConfigurer.getRefreshTokenExp());
         String accessToken = accessTokenBuilder.setAudience(member.getEmail()).claim("type", "access").compact();
         String refreshToken = refreshTokenBuilder.setAudience(member.getEmail()).claim("type", "refresh").compact();
 
         refreshTokenRepository.save(RefreshToken.builder().token(refreshToken).build());
-        return new TokenDto(accessToken, refreshToken);
+        return new TokenDTO(accessToken, refreshToken);
     }
 
     @Override

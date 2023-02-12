@@ -4,9 +4,10 @@ import com.couple.love.common.entity.Role;
 import com.couple.love.common.message.Message;
 import com.couple.love.domain.member.entity.Member;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
-public class MemberDto {
+public class MemberDTO {
     @Data
     public static class SignUpRequest {
         @NotBlank(message = Message.SIGN_UP_ID_MESSAGE)
@@ -55,6 +56,20 @@ public class MemberDto {
 
     @Data
     public static class LoginResponse{
+        private Long memberId;
+        private String email;
+        private String nickname;
+        private String accessToken;
+        private String refreshToken;
+
+        public LoginResponse(Member member, String accessToken, String refreshToken) {
+            this.memberId = member.getId();
+            this.email = member.getEmail();
+            this.nickname = member.getNickname();
+            this.accessToken = accessToken;
+            this.refreshToken = refreshToken;
+        }
+
     }
 
 

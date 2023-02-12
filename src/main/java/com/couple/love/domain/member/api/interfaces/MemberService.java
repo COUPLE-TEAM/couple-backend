@@ -1,4 +1,4 @@
-package com.couple.love.domain.member.api;
+package com.couple.love.domain.member.api.interfaces;
 
 import org.springframework.stereotype.Service;
 
