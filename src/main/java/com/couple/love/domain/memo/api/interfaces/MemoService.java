@@ -1,14 +1,15 @@
 package com.couple.love.domain.memo.api.interfaces;
 
+import com.couple.love.common.annotations.AuthMember;
+import com.couple.love.domain.member.entity.Member;
 import com.couple.love.domain.memo.dto.MemoDTO;
-import com.couple.love.domain.memo.entity.Memo;
 
 import java.util.List;
 
 public interface MemoService {
 
     // 생성
-    MemoDTO.CreateMemoResponse createMemo(MemoDTO.CreateMemoRequest createMemoRequest) throws Exception;
+    MemoDTO.CreateMemoResponse createMemo(@AuthMember Member member, MemoDTO.CreateMemoRequest createMemoRequest) throws Exception;
 
     // 커플 메모 리스트 조회
     List<MemoDTO.GetMemoResponse> getMemoListByCouple(Long coupleId) throws Exception;

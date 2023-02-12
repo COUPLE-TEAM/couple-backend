@@ -1,5 +1,7 @@
 package com.couple.love.domain.memo.controller;
 
+import com.couple.love.common.annotations.AuthMember;
+import com.couple.love.domain.member.entity.Member;
 import com.couple.love.domain.memo.api.interfaces.MemoService;
 import com.couple.love.domain.memo.dto.MemoDTO;
 import lombok.RequiredArgsConstructor;
@@ -33,8 +35,8 @@ public class MemoController {
 
     // 메모 생성
     @PostMapping("/")
-    private ResponseEntity<MemoDTO.CreateMemoResponse> createMemo(@RequestBody MemoDTO.CreateMemoRequest createMemoRequest) throws Exception {
-        MemoDTO.CreateMemoResponse response = memoService.createMemo(createMemoRequest);
+    private ResponseEntity<MemoDTO.CreateMemoResponse> createMemo(@AuthMember Member member, @RequestBody MemoDTO.CreateMemoRequest createMemoRequest) throws Exception {
+        MemoDTO.CreateMemoResponse response = memoService.createMemo(member, createMemoRequest);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

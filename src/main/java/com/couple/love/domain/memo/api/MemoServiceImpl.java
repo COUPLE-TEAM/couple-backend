@@ -1,5 +1,7 @@
 package com.couple.love.domain.memo.api;
 
+import com.couple.love.common.annotations.AuthMember;
+import com.couple.love.domain.member.entity.Member;
 import com.couple.love.domain.memo.api.interfaces.MemoService;
 import com.couple.love.domain.memo.dto.MemoDTO;
 import com.couple.love.domain.memo.entity.Memo;
@@ -20,14 +22,13 @@ public class MemoServiceImpl implements MemoService {
     private final MemoRespository memoRespository;
 
     @Override
-    public MemoDTO.CreateMemoResponse createMemo(MemoDTO.CreateMemoRequest createMemoRequest) throws Exception {
+    public MemoDTO.CreateMemoResponse createMemo(@AuthMember Member member, MemoDTO.CreateMemoRequest createMemoRequest) throws Exception {
 
-//        createMemoRequest.setMember(createMemoRequest.getMember());
-        createMemoRequest.setText(createMemoRequest.getText());
-        createMemoRequest.setTitle(createMemoRequest.getTitle());
+        Memo memo = createMemoRequest.toEntity();
 
-        Memo memo = memoRespository.save(createMemoRequest.toEntity());
-
+        memo.setMember(member);
+        memo.setMemo(createMemoRequest.getTitle(), createMemoRequest.getText());
+        memoRespository.save(memo);
         return new MemoDTO.CreateMemoResponse(memo);
     }
 
