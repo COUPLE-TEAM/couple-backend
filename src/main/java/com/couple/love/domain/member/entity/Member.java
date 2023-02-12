@@ -56,4 +56,7 @@ public class Member {
     @OneToMany(mappedBy = "writer")
     private List<Memo> memoList;
 
+    public void addMemo(Memo memo) {
+        this.memoList.add(memo);
+    }
 }

@@ -1,19 +1,16 @@
 package com.couple.love.domain.memo.entity;
 
 import com.couple.love.domain.couple.entity.Couple;
-import com.couple.love.domain.feed.entity.FeedPhoto;
 import com.couple.love.domain.member.entity.Member;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-
-import java.util.List;
+import lombok.*;
 
 @Entity
 @Table(name = "memo")
 @Getter
+@Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class Memo {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,4 +31,12 @@ public class Memo {
     @ManyToOne
     @JoinColumn(name = "couple_id")
     private Couple couple;
+
+    public void setMember(Member member) {
+        this.writer = member;
+    }
+    public void setMemo(String title, String text){
+        this.text = text;
+        this.title = title;
+    }
 }
