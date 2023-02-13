@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -51,18 +52,23 @@ public class MemoServiceImplTest {
     @Test
     @DisplayName("메모를 삭제하고 Member로 다시 메모를 조회할 때 제대로 삭제가 되어있다.")
     public void deleteMemoTestByMember() throws Exception {
+
+        Memo memo1 = Memo.builder().text("memo_test_text1").title("memo_test_title1").build();
+        Memo memo2 = Memo.builder().text("memo_test_text2").title("memo_test_title2").build();
+
         Member member = Member.builder().email("asdf").nickname("sh")
                 .password("1234").build();
 
         memberRepository.save(member);
 
-        Memo memo1= Memo.builder().id(1L).writer(member).text("memo_test_text1").title("memo_test_title1").build();
-        Memo memo2 = Memo.builder().id(2L).writer(member).text("memo_test_text2").title("memo_test_title2").build();
+        memo1.setMember(member);
+        memo2.setMember(member);
 
         memoRespository.save(memo1);
         memoRespository.save(memo2);
 
-        memoService.deleteMemo(1L);
+
+        memoService.deleteMemo(memo1.getId());
         List<MemoDTO.MemoDetailResponse> memoListAfterDelete = memoService.getAllMemoByMember(member.getId());
         assertEquals(1, memoListAfterDelete.size());
 
