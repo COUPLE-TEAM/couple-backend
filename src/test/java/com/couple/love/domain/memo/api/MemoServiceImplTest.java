@@ -34,9 +34,10 @@ public class MemoServiceImplTest {
     @Autowired
     MemberRepository memberRepository;
 
+    //create
     @Test
-    @DisplayName("메모의 text와 title중 하나라도 비어 있을 경우 예외가 발생한다.")
-    public void inValidCreateMemoTest() throws Exception {
+    @DisplayName("메모의 text가 비어 있을 경우 예외가 발생한다.")
+    public void inValidTextCreateMemoTest() throws Exception {
         Member member = Member.builder().email("asdf").nickname("sh")
                 .password("1234").build();
 
@@ -46,9 +47,77 @@ public class MemoServiceImplTest {
         Assertions.assertThrows(Exception.class, () -> {
             memoService.createMemo(member,request);
         });
+    }
+
+    @Test
+    @DisplayName("메모의 title이 비어 있을 경우 예외가 발생한다.")
+    public void inValidTitleCreateMemoTest() throws Exception {
+        Member member = Member.builder().email("asdf").nickname("sh")
+                .password("1234").build();
+
+        MemoDTO.CreateMemoRequest request = new MemoDTO.CreateMemoRequest();
+        request.setText("test_text");
+
+        Assertions.assertThrows(Exception.class, () -> {
+            memoService.createMemo(member,request);
+        });
 
     }
 
+    //getMemo
+    @Test
+    @DisplayName("메모를 가져온다. ")
+    public void getMemo() throws Exception {
+        Member member = Member.builder().email("asdf").nickname("sh")
+                .password("1234").build();
+
+        Memo memo = Memo.builder().writer(member).text("memo_test_text").title("memo_test_title").build();
+        memoRespository.save(memo);
+
+        MemoDTO.MemoDetailResponse response = memoService.getMemo(memo.getId());
+
+        assertEquals(memo.getText(),response.getText());
+    }
+
+    //getMemoByMember
+    @Test
+    @DisplayName("멤버별 메모를 가져온다. ")
+    public void getMemoByMember() throws Exception {
+        Member member = Member.builder().email("asdf").nickname("sh")
+                .password("1234").build();
+
+        memberRepository.save(member);
+
+        Memo memo = Memo.builder().writer(member).text("memo_test_text").title("memo_test_title").build();
+        memoRespository.save(memo);
+
+        List<MemoDTO.MemoDetailResponse> response = memoService.getAllMemoByMember(member.getId());
+
+        assertEquals(memo.getText(),response.get(0).getText());
+    }
+
+    //update
+    @Test
+    @DisplayName("메모 update가 정상적으로 실행된다.")
+    public void updateMemoTest() throws Exception {
+        Member member = Member.builder().email("asdf").nickname("sh")
+                .password("1234").build();
+
+        Memo memo = Memo.builder().writer(member).text("memo_test_text").title("memo_test_title").build();
+        memoRespository.save(memo);
+
+        MemoDTO.UpdateMemoRequest updateMemoRequest = new MemoDTO.UpdateMemoRequest();
+        updateMemoRequest.setTitle("change_title");
+        updateMemoRequest.setText("change_text");
+
+        MemoDTO.MemoDetailResponse response = memoService.updateMemo(memo.getId(), updateMemoRequest);
+
+        assertEquals("change_text",response.getText());
+        assertEquals("change_title",response.getTitle());
+
+    }
+
+    // delete
     @Test
     @DisplayName("메모를 삭제하고 Member로 다시 메모를 조회할 때 제대로 삭제가 되어있다.")
     public void deleteMemoTestByMember() throws Exception {
@@ -66,7 +135,6 @@ public class MemoServiceImplTest {
 
         memoRespository.save(memo1);
         memoRespository.save(memo2);
-
 
         memoService.deleteMemo(memo1.getId());
         List<MemoDTO.MemoDetailResponse> memoListAfterDelete = memoService.getAllMemoByMember(member.getId());

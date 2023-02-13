@@ -93,32 +93,6 @@ public class MemoControllerTest {
 
     }
 
-//    @Test
-//    @DisplayName("메모 멤버별 조회")
-//    public void getAllMemoByMemberTest() throws Exception {
-//
-//        Memo memo = Memo.builder().text("memo_test_text1").title("memo_test_title1").build();
-//
-//        Member member = Member.builder().email("asdf").nickname("skc")
-//                .password("1234").build();
-//
-//        memberRepository.save(member);
-//
-//        memo.setMember(member);
-//
-//        memoRespository.save(memo);
-//
-//        mockMvc.perform(MockMvcRequestBuilders.
-////                        .get("/api/memo/member").
-////                        .accept(MediaType.APPLICATION_JSON))
-////                        .andExpect(status().isOk())
-////                        .andExpect(MockMvcResultMatchers.jsonPath("$[0].title").exists())
-////                        .andExpect(MockMvcResultMatchers.jsonPath("$[0].text").exists())
-////                        .andExpect(MockMvcResultMatchers.jsonPath("$[0].memoId").exists())
-////                        .andExpect(MockMvcResultMatchers.jsonPath("$[0].memberId").exists());
-//    }
-
-
     @Test
     @DisplayName("메모 삭제")
     public void deleteMemoTest() throws Exception {
