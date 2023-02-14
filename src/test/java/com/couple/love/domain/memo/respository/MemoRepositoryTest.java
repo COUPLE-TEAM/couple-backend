@@ -34,7 +34,10 @@ public class MemoRepositoryTest {
         Member member = Member.builder().email("asdf").nickname("sh")
                 .password("1234").build();
 
+        memberRepository.save(member);
         Memo memo = Memo.builder().writer(member).text("memo_test_text").title("memo_test_title").build();
+        memoRespository.save(memo);
+
         List<Memo> all = memoRespository.findAll();
 
         assertEquals(1, all.size());
