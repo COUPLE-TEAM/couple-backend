@@ -31,7 +31,11 @@ public class MemoDTO {
     @Data
     public static class UpdateMemoRequest {
 //        private Couple couple;
+
+        @NotBlank(message = Message.CREATE_MEMO_TITLE_MESSAGE)
         private String title;
+
+        @NotBlank(message = Message.CREATE_MEMO_TEXT_MESSAGE)
         private String text;
 
         public Memo toEntity() {

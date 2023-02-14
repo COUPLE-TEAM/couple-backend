@@ -45,7 +45,7 @@ public class MemoServiceImpl implements MemoService {
     @Transactional(readOnly = true)
     public List<MemoDTO.MemoDetailResponse> getAllMemoByCouple(Long coupleId) throws Exception {
 
-        List<Memo> memoListByCouple = memoRespository.findMemoListByCouple(coupleId);
+        List<Memo> memoListByCouple = memoRespository.findByCoupleId(coupleId);
 
         return memoListByCouple.stream().map(MemoDTO.MemoDetailResponse::new).collect(Collectors.toList());
 
@@ -55,7 +55,7 @@ public class MemoServiceImpl implements MemoService {
     @Transactional(readOnly = true)
     public List<MemoDTO.MemoDetailResponse> getAllMemoByMember(Long memberId) throws Exception {
 
-        List<Memo> memoListByCouple = memoRespository.findMemoListByMember(memberId);
+        List<Memo> memoListByCouple = memoRespository.findByMemberId(memberId);
 
         return memoListByCouple.stream().map(MemoDTO.MemoDetailResponse::new).collect(Collectors.toList());
     }
