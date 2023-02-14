@@ -9,11 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface MemoRespository extends JpaRepository<Memo,Long> {
+public interface MemoRespository extends JpaRepository<Memo,Long>, MemoRepositoryCustom{
 
-    @Query(value = "select m from Memo m where m.couple.id = :coupleId")
-    List<Memo> findMemoListByCouple(@Param(value="coupleId") Long coupleId);
-
-    @Query(value = "select m from Memo m where m.writer.id = :memberId")
-    List<Memo> findMemoListByMember(@Param(value="memberId") Long memberId);
+    List<Memo> findByMemberId(Long memberId);
 }
