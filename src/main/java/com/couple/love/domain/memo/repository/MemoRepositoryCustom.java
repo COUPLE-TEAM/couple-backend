@@ -7,4 +7,7 @@ import java.util.List;
 public interface MemoRepositoryCustom {
 
     List<Memo> findByCoupleId(Long id);
+
+    List<Memo> findByMemberId(Long memberId);
+
 }
